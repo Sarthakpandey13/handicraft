@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { JsonLd } from "@/components/JsonLd";
 import { Invocation } from "@/components/Invocation";
+import { PageTransition } from "@/components/PageTransition";
 import { site } from "@/lib/site";
 
 const localBusinessSchema = {
@@ -32,7 +33,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <JsonLd data={localBusinessSchema} />
       <Invocation />
       <Nav />
-      {children}
+      <PageTransition>{children}</PageTransition>
       <Footer />
       <WhatsAppButton />
     </>

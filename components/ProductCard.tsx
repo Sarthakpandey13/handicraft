@@ -6,6 +6,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <div
       id={product.slug}
+      className="hover-card"
       style={{
         scrollMarginTop: "6rem",
         background: "var(--surface)",
@@ -16,7 +17,7 @@ export function ProductCard({ product }: { product: Product }) {
         flexDirection: "column",
       }}
     >
-      <div style={{ position: "relative", width: "100%", aspectRatio: "4 / 3", background: "var(--placeholder-a)" }}>
+      <div className="hover-zoom" style={{ position: "relative", width: "100%", aspectRatio: "4 / 3", background: "var(--placeholder-a)" }}>
         <ProductImage src={product.image} alt={product.name} />
       </div>
       <div style={{ padding: "1.25rem", display: "flex", flexDirection: "column", gap: "0.5rem", flex: 1 }}>

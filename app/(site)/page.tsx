@@ -79,8 +79,8 @@ export default function Home() {
                 href={`/products/${cat.slug}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <div style={{ border: "1px solid var(--border)", borderRadius: "10px", overflow: "hidden", background: "var(--surface)", height: "100%" }}>
-                  <div style={{ position: "relative", width: "100%", aspectRatio: "4 / 3" }}>
+                <div className="hover-card" style={{ border: "1px solid var(--border)", borderRadius: "10px", overflow: "hidden", background: "var(--surface)", height: "100%" }}>
+                  <div className="hover-zoom" style={{ position: "relative", width: "100%", aspectRatio: "4 / 3" }}>
                     <ProductImage src={cat.heroImage} alt={cat.name} />
                   </div>
                   <div style={{ padding: "1.25rem" }}>

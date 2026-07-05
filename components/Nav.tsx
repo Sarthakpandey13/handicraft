@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { site } from "@/lib/site";
@@ -14,6 +14,15 @@ const links = [
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <header
       style={{
@@ -21,8 +30,10 @@ export function Nav() {
         top: 0,
         zIndex: 100,
         background: "var(--nav-bg)",
-        backdropFilter: "blur(10px)",
+        backdropFilter: scrolled ? "blur(14px)" : "blur(10px)",
         borderBottom: "1px solid var(--border)",
+        boxShadow: scrolled ? "0 6px 20px rgba(36, 29, 21, 0.08)" : "none",
+        transition: "box-shadow 0.3s ease",
       }}
     >
       <div
@@ -30,10 +41,11 @@ export function Nav() {
           maxWidth: 1180,
           margin: "0 auto",
           padding: "0 1.5rem",
-          height: 72,
+          height: scrolled ? 58 : 72,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          transition: "height 0.3s ease",
         }}
       >
         <Link

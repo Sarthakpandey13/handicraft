@@ -43,3 +43,31 @@ a {
   background: #7a1f2b22;
   color: var(--accent);
 }
+
+.hover-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(36, 29, 21, 0.1);
+}
+
+.hover-zoom {
+  overflow: hidden;
+}
+
+.hover-zoom img {
+  transition: transform 0.45s ease;
+}
+
+.hover-card:hover .hover-zoom img {
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-card,
+  .hover-zoom img {
+    transition: none;
+  }
+}
