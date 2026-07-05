@@ -3,8 +3,9 @@ import { site } from "@/lib/site";
 import { ProductImage } from "@/components/ProductImage";
 
 export const metadata: Metadata = {
-  title: `About Us — ${site.name}`,
+  title: "About Us",
   description: `The story behind ${site.name}, ${site.yearsOfExperience} years of marble handicraft in ${site.address.city}.`,
+  alternates: { canonical: "/about" },
 };
 
 const stats = [

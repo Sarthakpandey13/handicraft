@@ -3,8 +3,9 @@ import { Package, Ship, MessageCircle, Ruler } from "lucide-react";
 import { site, whatsappLink } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `Export & Shipping — ${site.name}`,
+  title: "Export & Shipping",
   description: `Domestic and international shipping information for ${site.name}.`,
+  alternates: { canonical: "/export" },
 };
 
 const points = [

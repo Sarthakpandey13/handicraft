@@ -4,8 +4,9 @@ import { site, mapsDirectionsLink } from "@/lib/site";
 import { ContactForm } from "@/components/ContactForm";
 
 export const metadata: Metadata = {
-  title: `Contact Us — ${site.name}`,
+  title: "Contact Us",
   description: `Get in touch with ${site.name} for enquiries, custom orders and bulk/export orders.`,
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

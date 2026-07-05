@@ -5,8 +5,9 @@ import { site } from "@/lib/site";
 import { ProductImage } from "@/components/ProductImage";
 
 export const metadata: Metadata = {
-  title: `Products — ${site.name}`,
+  title: "Products",
   description: `Browse marble idols, pooja murtis, home temples and custom orders from ${site.name}.`,
+  alternates: { canonical: "/products" },
 };
 
 export default function ProductsPage() {

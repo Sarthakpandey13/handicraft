@@ -5,7 +5,9 @@ import type { Product } from "@/lib/products";
 export function ProductCard({ product }: { product: Product }) {
   return (
     <div
+      id={product.slug}
       style={{
+        scrollMarginTop: "6rem",
         background: "var(--surface)",
         border: "1px solid var(--border)",
         borderRadius: "10px",

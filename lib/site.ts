@@ -1,5 +1,7 @@
 // PLACEHOLDER BUSINESS INFO — replace every value below with the real details.
 export const site = {
+  // Real production domain — update once the site has one, then update NEXT_PUBLIC_SITE_URL too.
+  url: "https://www.shreeganeshmarble.com",
   name: "Shree Ganesh Marble Arts",
   tagline: "Hand-carved marble idols & temple art, crafted in Rajasthan",
   shortName: "Shree Ganesh Marble Arts",
