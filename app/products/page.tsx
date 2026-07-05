@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { categories } from "@/lib/products";
 import { site } from "@/lib/site";
+import { categoryMantras } from "@/lib/vedic";
 import { ProductImage } from "@/components/ProductImage";
 
 export const metadata: Metadata = {
@@ -32,7 +33,12 @@ export default function ProductsPage() {
                 <ProductImage src={cat.heroImage} alt={cat.name} />
               </div>
               <div style={{ padding: "1.5rem" }}>
-                <h2 style={{ fontSize: "19px", fontWeight: 600, color: "var(--heading)", marginBottom: "0.5rem" }}>{cat.name}</h2>
+                <h2 style={{ fontSize: "19px", fontWeight: 600, color: "var(--heading)", marginBottom: "0.3rem" }}>{cat.name}</h2>
+                {categoryMantras[cat.slug] && (
+                  <p style={{ fontSize: "12px", color: "var(--accent2)", fontStyle: "italic", marginBottom: "0.6rem" }}>
+                    <span lang="sa">{categoryMantras[cat.slug].sanskrit}</span> · {categoryMantras[cat.slug].meaning}
+                  </p>
+                )}
                 <p style={{ fontSize: "13px", color: "var(--muted)", lineHeight: 1.6 }}>{cat.description}</p>
                 <span style={{ fontSize: "13px", color: "var(--accent)", fontWeight: 600, display: "inline-block", marginTop: "0.9rem" }}>
                   View {cat.items.length} items →

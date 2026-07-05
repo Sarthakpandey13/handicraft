@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { MapPin, Phone, Mail, Clock, Navigation } from "lucide-react";
 import { site, mapsDirectionsLink } from "@/lib/site";
+import { prosperityMantra } from "@/lib/vedic";
 import { ContactForm } from "@/components/ContactForm";
+import { DiyaFlame } from "@/components/DiyaFlame";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -15,9 +17,15 @@ export default function ContactPage() {
       <p style={{ fontSize: "12px", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 600, marginBottom: "0.5rem" }}>
         Contact
       </p>
-      <h1 style={{ fontSize: "clamp(1.9rem, 5vw, 2.6rem)", color: "var(--heading)", fontWeight: 700, marginBottom: "3rem", maxWidth: 620 }}>
+      <h1 style={{ fontSize: "clamp(1.9rem, 5vw, 2.6rem)", color: "var(--heading)", fontWeight: 700, marginBottom: "0.6rem", maxWidth: 620 }}>
         Get in touch
       </h1>
+      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "3rem" }}>
+        <DiyaFlame size={26} />
+        <p style={{ fontSize: "13px", color: "var(--accent2)", fontStyle: "italic" }}>
+          <span lang="sa">{prosperityMantra.sanskrit}</span> — {prosperityMantra.meaning}
+        </p>
+      </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "3rem" }}>
         <div>

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
+import { invocation, prosperityMantra } from "@/lib/vedic";
 import { ProductImage } from "@/components/ProductImage";
+import { OmWatermark } from "@/components/OmWatermark";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -16,7 +18,9 @@ const stats = [
 
 export default function AboutPage() {
   return (
-    <main style={{ maxWidth: 1000, margin: "0 auto", padding: "4rem 1.5rem" }}>
+    <main style={{ maxWidth: 1000, margin: "0 auto", padding: "4rem 1.5rem", position: "relative" }}>
+      <OmWatermark />
+      <div style={{ position: "relative", zIndex: 1 }}>
       <p style={{ fontSize: "12px", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 600, marginBottom: "0.5rem" }}>
         About Us
       </p>
@@ -52,6 +56,37 @@ export default function AboutPage() {
         <div style={{ position: "relative", width: "100%", aspectRatio: "4 / 5", borderRadius: "10px", overflow: "hidden", border: "1px solid var(--border)" }}>
           <ProductImage src="/about/workshop.jpg" alt="Our artisans at work" />
         </div>
+      </div>
+
+      <div style={{ border: "1px solid var(--border)", borderRadius: "10px", padding: "2rem", background: "var(--surface)" }}>
+        <h2 style={{ fontSize: "1.4rem", color: "var(--heading)", fontWeight: 700, marginBottom: "1rem" }}>
+          Rooted in Vedic tradition
+        </h2>
+        <p style={{ color: "var(--muted)", lineHeight: 1.8, fontSize: "15px", marginBottom: "1.5rem" }}>
+          In Hindu tradition, any new undertaking begins with an invocation to Lord Ganesh, remover of obstacles —
+          which is why his murti is often the first piece an artisan learns to carve, and the first idol a family
+          brings home. Lakshmi Mata, goddess of prosperity, is invoked alongside him for wealth and well-being. Our
+          work — and the idols we carve — follow that same order.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.5rem" }}>
+          <div>
+            <p style={{ fontSize: "16px", color: "var(--accent)", fontWeight: 600 }}>
+              <span lang="sa">{invocation.sanskrit}</span>
+            </p>
+            <p style={{ fontSize: "12px", color: "var(--muted)" }}>
+              {invocation.transliteration} — {invocation.meaning}
+            </p>
+          </div>
+          <div>
+            <p style={{ fontSize: "16px", color: "var(--accent)", fontWeight: 600 }}>
+              <span lang="sa">{prosperityMantra.sanskrit}</span>
+            </p>
+            <p style={{ fontSize: "12px", color: "var(--muted)" }}>
+              {prosperityMantra.transliteration} — {prosperityMantra.meaning}
+            </p>
+          </div>
+        </div>
+      </div>
       </div>
     </main>
   );

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { categories, getCategory } from "@/lib/products";
 import { site } from "@/lib/site";
+import { categoryMantras } from "@/lib/vedic";
 import { ProductCard } from "@/components/ProductCard";
 import { JsonLd } from "@/components/JsonLd";
 
@@ -33,6 +34,8 @@ export default async function CategoryPage({
   const { category } = await params;
   const cat = getCategory(category);
   if (!cat) notFound();
+
+  const mantra = categoryMantras[cat.slug];
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -68,9 +71,14 @@ export default async function CategoryPage({
       <Link href="/products" style={{ fontSize: "13px", color: "var(--accent)", textDecoration: "none", fontWeight: 600 }}>
         ← All Products
       </Link>
-      <h1 style={{ fontSize: "clamp(1.9rem, 5vw, 2.6rem)", color: "var(--heading)", fontWeight: 700, margin: "1rem 0 0.75rem" }}>
+      <h1 style={{ fontSize: "clamp(1.9rem, 5vw, 2.6rem)", color: "var(--heading)", fontWeight: 700, margin: "1rem 0 0.4rem" }}>
         {cat.name}
       </h1>
+      {mantra && (
+        <p style={{ fontSize: "13px", color: "var(--accent2)", fontStyle: "italic", marginBottom: "0.75rem" }}>
+          <span lang="sa">{mantra.sanskrit}</span> ({mantra.transliteration}) — {mantra.meaning}
+        </p>
+      )}
       <p style={{ color: "var(--muted)", fontSize: "15px", maxWidth: 640, marginBottom: "3rem" }}>{cat.description}</p>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1.5rem" }}>
