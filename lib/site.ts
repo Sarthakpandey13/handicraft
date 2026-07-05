@@ -25,6 +25,8 @@ export const site = {
     facebook: "https://facebook.com/",
   },
   hours: "Mon – Sat, 9:00 AM – 7:00 PM (IST)",
+  // Replace with your real Calendly scheduling link (calendly.com/your-name/consultation).
+  calendlyUrl: "https://calendly.com/shreeganeshmarble/consultation",
 } as const;
 
 export function whatsappLink(message: string) {

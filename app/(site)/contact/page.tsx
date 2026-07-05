@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { MapPin, Phone, Mail, Clock, Navigation } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Navigation, CalendarClock } from "lucide-react";
 import { site, mapsDirectionsLink } from "@/lib/site";
 import { prosperityMantra } from "@/lib/vedic";
 import { ContactForm } from "@/components/ContactForm";
 import { DiyaFlame } from "@/components/DiyaFlame";
+import { BookConsultation } from "@/components/BookConsultation";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -25,6 +26,30 @@ export default function ContactPage() {
         <p style={{ fontSize: "13px", color: "var(--accent2)", fontStyle: "italic" }}>
           <span lang="sa">{prosperityMantra.sanskrit}</span> — {prosperityMantra.meaning}
         </p>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          gap: "1.25rem",
+          justifyContent: "space-between",
+          border: "1px solid var(--border)",
+          borderRadius: "10px",
+          padding: "1.5rem 1.75rem",
+          background: "var(--surface)",
+          marginBottom: "3rem",
+        }}
+      >
+        <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+          <CalendarClock size={28} style={{ color: "var(--accent)", flexShrink: 0 }} />
+          <div>
+            <h2 style={{ fontSize: "16px", fontWeight: 600, color: "var(--heading)" }}>Prefer to talk it through?</h2>
+            <p style={{ fontSize: "13px", color: "var(--muted)" }}>Book a free consultation call for custom or bulk orders.</p>
+          </div>
+        </div>
+        <BookConsultation />
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "3rem" }}>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Package, Ship, MessageCircle, Ruler } from "lucide-react";
 import { site, whatsappLink } from "@/lib/site";
+import { BookConsultation } from "@/components/BookConsultation";
 
 export const metadata: Metadata = {
   title: "Export & Shipping",
@@ -60,14 +61,17 @@ export default function ExportPage() {
         <p style={{ color: "var(--muted)", fontSize: "14px", marginBottom: "1.5rem" }}>
           Share the item, quantity and delivery destination — we&apos;ll respond with pricing and lead time.
         </p>
-        <a
-          href={whatsappLink("Hi, I have a bulk/export order enquiry. Item: ___ Quantity: ___ Destination: ___")}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ background: "var(--accent)", color: "#fff", padding: "12px 28px", borderRadius: "999px", textDecoration: "none", fontWeight: 600, fontSize: "14px" }}
-        >
-          Enquire on WhatsApp
-        </a>
+        <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap" }}>
+          <a
+            href={whatsappLink("Hi, I have a bulk/export order enquiry. Item: ___ Quantity: ___ Destination: ___")}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ background: "var(--accent)", color: "#fff", padding: "12px 28px", borderRadius: "999px", textDecoration: "none", fontWeight: 600, fontSize: "14px" }}
+          >
+            Enquire on WhatsApp
+          </a>
+          <BookConsultation label="Book a Call Instead" />
+        </div>
         <p style={{ color: "var(--muted)", fontSize: "13px", marginTop: "1rem" }}>
           Or email <a href={`mailto:${site.email}`} style={{ color: "var(--accent)" }}>{site.email}</a>
         </p>

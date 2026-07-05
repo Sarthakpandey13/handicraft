@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
+import sharp from "sharp";
 import { getCategorySlugs } from "@/lib/products";
 
 const MAX_SIZE = 8 * 1024 * 1024; // 8MB
-const ALLOWED_TYPES: Record<string, string> = {
-  "image/jpeg": "jpg",
-  "image/png": "png",
-  "image/webp": "webp",
-};
+const MAX_WIDTH = 1600; // originals wider than this are downscaled; next/image still
+// generates the smaller phone/tablet/desktop variants on demand from this file.
+const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 
 export async function POST(request: Request) {
   const formData = await request.formData();
@@ -25,8 +24,7 @@ export async function POST(request: Request) {
   if (typeof slug !== "string" || !/^[a-z0-9-]+$/.test(slug)) {
     return NextResponse.json({ error: "Invalid slug" }, { status: 400 });
   }
-  const ext = ALLOWED_TYPES[file.type];
-  if (!ext) {
+  if (!ALLOWED_TYPES.has(file.type)) {
     return NextResponse.json({ error: "Only JPEG, PNG or WebP images are allowed" }, { status: 400 });
   }
   if (file.size > MAX_SIZE) {
@@ -43,8 +41,13 @@ export async function POST(request: Request) {
       .map((f) => fs.unlink(path.join(dir, f)).catch(() => {}))
   );
 
-  const buffer = Buffer.from(await file.arrayBuffer());
-  await fs.writeFile(path.join(dir, `${slug}.${ext}`), buffer);
+  const inputBuffer = Buffer.from(await file.arrayBuffer());
+  const webpBuffer = await sharp(inputBuffer)
+    .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+    .webp({ quality: 82 })
+    .toBuffer();
 
-  return NextResponse.json({ path: `/products/${category}/${slug}.${ext}` });
+  await fs.writeFile(path.join(dir, `${slug}.webp`), webpBuffer);
+
+  return NextResponse.json({ path: `/products/${category}/${slug}.webp` });
 }
