@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { categories } from "@/lib/products";
+import { CATEGORY_META } from "@/lib/products";
 import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/contact`, changeFrequency: "yearly", priority: 0.6 },
   ];
 
-  const categoryRoutes: MetadataRoute.Sitemap = categories.map((cat) => ({
+  const categoryRoutes: MetadataRoute.Sitemap = CATEGORY_META.map((cat) => ({
     url: `${site.url}/products/${cat.slug}`,
     changeFrequency: "weekly",
     priority: 0.8,

@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shree Ganesh Marble Arts — website
 
-## Getting Started
+Next.js 16 site for a marble handicraft business: product catalog, WhatsApp
+enquiries, export info, and a password-protected admin panel at `/admin` for
+managing products and photos.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
+cp .env.example .env.local   # then edit ADMIN_PASSWORD and SESSION_SECRET
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Admin panel is at
+[http://localhost:3000/admin](http://localhost:3000/admin).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Editing content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Business details** (phone, address, WhatsApp number, etc.): `lib/site.ts`
+- **Product categories, names, descriptions**: use `/admin`, or edit
+  `data/products.json` directly
+- **Product photos**: upload via `/admin`, or drop files into
+  `public/products/<category>/` — see `public/products/README.md`
 
-## Learn More
+## Deploying on a VPS (e.g. AWS Lightsail)
 
-To learn more about Next.js, take a look at the following resources:
+This app needs to run as a **persistent Node.js process**, not a static
+export or serverless function — the admin panel writes product data to
+`data/products.json` and photos to `public/products/`, both on local disk.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repo on the server and run `npm install && npm run build`.
+2. Create a real `.env.local` (or set environment variables directly) with
+   a strong `ADMIN_PASSWORD` and a random `SESSION_SECRET`
+   (`openssl rand -hex 32`).
+3. Run it with a process manager so it survives reboots/crashes, e.g.:
+   ```bash
+   npm install -g pm2
+   pm2 start npm --name handicraft-site -- start
+   pm2 save
+   pm2 startup
+   ```
+4. Put Nginx (or similar) in front for TLS and to proxy port 80/443 to the
+   Next.js server's port (default 3000).
+5. Back up `data/products.json` and `public/products/` periodically — those
+   two are the only things that change after deploy.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Tech
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4.

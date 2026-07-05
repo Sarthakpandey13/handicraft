@@ -1,14 +1,17 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { categories, getCategory } from "@/lib/products";
+import { getCategorySlugs, getCategory } from "@/lib/products";
 import { site } from "@/lib/site";
 import { categoryMantras } from "@/lib/vedic";
 import { ProductCard } from "@/components/ProductCard";
 import { JsonLd } from "@/components/JsonLd";
+import { FadeIn } from "@/components/FadeIn";
+
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
-  return categories.map((c) => ({ category: c.slug }));
+  return getCategorySlugs().map((slug) => ({ category: slug }));
 }
 
 export async function generateMetadata({
@@ -82,8 +85,10 @@ export default async function CategoryPage({
       <p style={{ color: "var(--muted)", fontSize: "15px", maxWidth: 640, marginBottom: "3rem" }}>{cat.description}</p>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1.5rem" }}>
-        {cat.items.map((item) => (
-          <ProductCard key={item.slug} product={item} />
+        {cat.items.map((item, i) => (
+          <FadeIn key={item.slug} delay={i * 0.08}>
+            <ProductCard product={item} />
+          </FadeIn>
         ))}
       </div>
     </main>

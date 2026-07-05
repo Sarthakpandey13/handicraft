@@ -3,6 +3,7 @@ import { site } from "@/lib/site";
 import { invocation, prosperityMantra } from "@/lib/vedic";
 import { ProductImage } from "@/components/ProductImage";
 import { OmWatermark } from "@/components/OmWatermark";
+import { FadeIn } from "@/components/FadeIn";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -28,6 +29,7 @@ export default function AboutPage() {
         A family workshop dedicated to the art of marble carving
       </h1>
 
+      <FadeIn>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "3rem", alignItems: "center", marginBottom: "3.5rem" }}>
         <div>
           <p style={{ color: "var(--muted)", lineHeight: 1.8, fontSize: "15px", marginBottom: "1.25rem" }}>
@@ -57,7 +59,9 @@ export default function AboutPage() {
           <ProductImage src="/about/workshop.jpg" alt="Our artisans at work" />
         </div>
       </div>
+      </FadeIn>
 
+      <FadeIn>
       <div style={{ border: "1px solid var(--border)", borderRadius: "10px", padding: "2rem", background: "var(--surface)" }}>
         <h2 style={{ fontSize: "1.4rem", color: "var(--heading)", fontWeight: 700, marginBottom: "1rem" }}>
           Rooted in Vedic tradition
@@ -87,6 +91,7 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
+      </FadeIn>
       </div>
     </main>
   );

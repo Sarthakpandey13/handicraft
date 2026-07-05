@@ -1,5 +1,5 @@
 import { site } from "@/lib/site";
-import { categories } from "@/lib/products";
+import { CATEGORY_META } from "@/lib/products";
 
 export const dynamic = "force-static";
 
@@ -16,7 +16,7 @@ export function GET() {
     "- [Home](/): Overview, category grid, why-choose-us.",
     "- [About](/about): Business history, craftsmanship, years of experience.",
     "- [Products](/products): All product categories.",
-    ...categories.map(
+    ...CATEGORY_META.map(
       (c) => `- [${c.name}](/products/${c.slug}): ${c.description}`
     ),
     "- [Export & Shipping](/export): Domestic and international shipping, custom sizing, packaging.",
